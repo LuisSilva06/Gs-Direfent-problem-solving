@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HidroSafe - Monitoramento de Enchentes</title>
+  <link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>💧 HidroSafe</h1>
+    <div class="alerta">⚠️ ALERTA DE ENCHENTE</div>
+  </header>
+
+  <main>
+    <section class="painel">
+      <div class="grafico">
+        <h2>Nível de Água (m)</h2>
+        <div class="barras">
+          <div style="--valor: 0.5" title="Dia 1: 0.5m"></div>
+          <div style="--valor: 0.6" title="Dia 2: 0.6m"></div>
+          <div style="--valor: 0.8" title="Dia 3: 0.8m"></div>
+          <div class="alerta-barra" style="--valor: 1.9" title="Dia 4: 1.9m 🚨"></div>
+          <div class="alerta-barra" style="--valor: 1.6" title="Dia 5: 1.6m 🚨"></div>
+          <div style="--valor: 1.2" title="Dia 6: 1.2m"></div>
+          <div style="--valor: 1.0" title="Dia 7: 1.0m"></div>
+          <div style="--valor: 1.3" title="Dia 8: 1.3m"></div>
+          <div class="alerta-barra" style="--valor: 1.7" title="Dia 9: 1.7m 🚨"></div>
+          <div style="--valor: 0.9" title="Dia 10: 0.9m"></div>
+        </div>
+        <div class="linha-transbordo">Nível de transbordamento: 1.5m</div>
+      </div>
+
+      <div class="mapa">
+        <h2>Áreas Afetadas</h2>
+        <img src="/src/assets/imgs/Mapa_spattt.png" alt="Mapa Simulado" />
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
