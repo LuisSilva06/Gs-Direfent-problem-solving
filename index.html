@@ -32,11 +32,107 @@
       </div>
 
       <div class="mapa">
-        <h2>Áreas Afetadas</h2>
+        <h2>Últimas Áreas Afetadas</h2>
         <img src="/src/assets/imgs/Mapa_spattt.png" alt="Mapa Simulado" />
       </div>
+            <!-- Dentro do seu .painel ou embaixo do gráfico -->
+    <button class="simulador" id="btnAtualizar">🔄 Atualizar Dados</button>
+    <p id="ultimaAtualizacao" style="margin-top: 10px; font-weight: bold;"></p>
+
     </section>
 
+
   </main>
+
+ 
+<script>
+  const LIMITE_TRANSBORDO = 1.5;
+  const cidades = [
+    'São Paulo',
+    'Campinas',
+    'Santos',
+    'São José dos Campos',
+    'Ribeirão Preto',
+    'Sorocaba',
+    'Bauru',
+    'Guarulhos',
+    'Taubaté',
+    'Piracicaba'
+  ];
+
+  function gerarGrafico() {
+    const barrasContainer = document.querySelector('.barras');
+    barrasContainer.innerHTML = ''; // limpa as barras antigas
+
+    let alertaAtivado = false;
+
+    cidades.forEach((cidade, index) => {
+      const valor = (Math.random() * 2).toFixed(2); // valor entre 0 e 2m
+
+      // Cria container da barra + label
+      const container = document.createElement('div');
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.alignItems = 'center';
+      container.style.flex = '1';
+      container.style.minWidth = '40px';
+
+      // Cria a barra
+      const barra = document.createElement('div');
+      barra.style.setProperty('--valor', valor);
+      barra.style.width = '20px';
+      barra.style.height = `calc(${valor} * 100px)`; // mesmo efeito do seu CSS
+      barra.style.background = '#2196f3';
+      barra.style.transition = 'height 0.5s, background-color 0.5s';
+      barra.title = `${cidade}: ${valor}m`;
+
+      if (valor >= LIMITE_TRANSBORDO) {
+        barra.classList.add('alerta-barra');
+        alertaAtivado = true;
+      }
+
+      // Cria o label da cidade
+      const label = document.createElement('span');
+      label.textContent = cidade;
+      label.style.marginTop = '5px';
+      label.style.fontSize = '12px';
+      label.style.textAlign = 'center';
+      label.style.wordBreak = 'break-word';
+
+      // Monta o container
+      container.appendChild(barra);
+      container.appendChild(label);
+      barrasContainer.appendChild(container);
+    });
+
+    // Atualiza o alerta no header
+    const alertaHeader = document.querySelector('.alerta');
+    if (alertaAtivado) {
+      alertaHeader.textContent = '⚠️ ALERTA DE ENCHENTE';
+      alertaHeader.style.backgroundColor = '#d32f2f';
+    } else {
+      alertaHeader.textContent = '✅ Níveis de água normais';
+      alertaHeader.style.backgroundColor = '#388e3c';
+    }
+
+    // Atualiza a hora da última atualização
+    const ultimaAtualizacao = document.getElementById('ultimaAtualizacao');
+    const agora = new Date();
+    ultimaAtualizacao.textContent = `Última atualização: ${agora.toLocaleString()}`;
+  }
+
+  // gera gráfico inicial
+  gerarGrafico();
+
+  // atualiza a cada 10 segundos (simulação de leitura periódica)
+  setInterval(gerarGrafico, 10000);
+
+  // botão manual
+  document.getElementById('btnAtualizar').addEventListener('click', gerarGrafico);
+</script>
+
+
+
+
 </body>
 </html>
